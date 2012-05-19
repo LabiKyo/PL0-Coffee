@@ -1,0 +1,6 @@
+.rvmrc
+node_modules
+Gemfile.lock
+refs
+build
+
