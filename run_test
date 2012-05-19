@@ -1,0 +1,12 @@
+#!/bin/sh
+coffee -j build/pl0-coffee.js -b -c src && \
+./node_modules/.bin/mocha \
+	--reporter spec \
+	--compilers coffee:coffee-script \
+	--require should \
+	--require underscore \
+	--require spec/node_test_runner.js \
+	--require build/pl0-coffee.js \
+	--slow 75 \
+	--growl \
+	./spec/*.coffee

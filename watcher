@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import os
+
+from fsevents import Observer, Stream
+
+def callback(subpath, mask):
+  os.system('./run_test')
+
+stream = Stream(callback, './spec', './src')
+observer = Observer()
+observer.start()
+observer.schedule(stream)
