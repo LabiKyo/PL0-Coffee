@@ -1,10 +1,14 @@
 #!/bin/sh
-coffee -j build/pl0-coffee.js -b -c src && \
+coffee -o build/ -b -c src && \
+coffee -j build/pl0-coffee.js -b -c \
+	src/tag \
+	src/token \
+	src/lexer && \
+
 ./node_modules/.bin/mocha \
 	--reporter spec \
 	--compilers coffee:coffee-script \
 	--require should \
-	--require underscore \
 	--require spec/node_test_runner.js \
 	--require build/pl0-coffee.js \
 	--slow 75 \
