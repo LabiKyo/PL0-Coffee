@@ -1,4 +1,4 @@
-{Token, TAG} = Compiler
+{Token, Number, TAG} = Compiler
 class Compiler.Lexer
 
   constructor: (@source) ->
@@ -27,6 +27,13 @@ class Compiler.Lexer
         continue
       break
 
+    if /^[0-9]$/.test @peek
+      value = ''
+      while /^[0-9]$/.test @peek
+        value += @peek
+        @read()
+      return new Number value
+
     forward = @get_forward()
     switch @peek
       when '+', '-', '*', '/', '=', '(', ')', ',', ';', '.'
@@ -49,3 +56,5 @@ class Compiler.Lexer
           new Token @peek + forward
         else
           new Token @peek
+      else
+        throw new Error "Invalid token: #{@peek}"

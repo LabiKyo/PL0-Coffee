@@ -30,11 +30,17 @@ describe 'Lexer', ->
 
     it 'skip EOF but add line number', ->
       lexer = new Lexer '+    \n  \t-\n'
-      lexer.line.should.eql(1)
+      lexer.line.should.eql 1
       lexer.scan()
-      lexer.line.should.eql(1)
+      lexer.line.should.eql 1
       lexer.scan()
-      lexer.line.should.eql(2)
+      lexer.line.should.eql 2
+
+    it 'throw Error when token is invalid', ->
+      lexer = new Lexer '#'
+      read = ->
+        lexer.scan()
+      read.should.throw "Invalid token: #"
 
     describe 'scan operators, relations, punctuation marks', ->
       fn = (token) -> # function for closure
@@ -44,4 +50,8 @@ describe 'Lexer', ->
 
       for token in ['+', '-', '*', '/', '=', '<>', '<', '<=', '>', '>=', '(', ')', ',', ';', '.', ':=']
         fn(token)
+
+      it 'scan number and return a Number Token', ->
+        lexer = new Lexer '1232132 '
+        lexer.scan().tag.should.eql 'number'
 

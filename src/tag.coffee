@@ -33,3 +33,19 @@ Compiler.TAG = [
   'read',       # 30
   'write',      # 31
 ]
+
+Compiler.KEYWORDS = [
+  'odd',
+  'begin',
+  'end',
+  'if',
+  'then',
+  'while',
+  'do',
+  'call',
+  'const',
+  'var',
+  'procedure',
+  'read',
+  'write',
+]
